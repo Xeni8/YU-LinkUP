@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Log in · YU Link Up</title>
+  <link rel="icon" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app narrow">
+    <div class="page-header">
+      <div>
+        <h1>YU Link Up</h1>
+        <p>Find a project team in your course sections.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Simulated login.</strong> In the real system you would sign in with your Passport York account, but 
+      for this prototype, pick an example student. Open a second browser to be a second student at the same time.
+    </div>
+    <div class="student-grid" id="students"></div>
+  </div>
+  <script src="common.js"></script>
+  <script>
+    async function showStudents() {
+      const students = await api("GET", "/api/students");
+      render(document.getElementById("students"), students.map((s) =>
+        h("button", {
+          className: "student-btn",
+          onClick: async () => {
+            await api("POST", "/api/login", { studentId: s.student_id });
+            location.href = "/mypings.html"; 
+          }
+        }, h("strong", null, s.name), h("small", null, s.email))
+      ));
+    }
+    showStudents();
+  </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "yu-link-up-project-ping",
+  "version": "1.0.0",
+  "description": "YU Link Up prototype: the Project Ping team-recruitment scenario",
+  "private": true,
+  "engines": { "node": ">=22.5" },
+  "scripts": {
+    "seed": "node --experimental-sqlite --no-warnings seed.js",
+    "start": "node --experimental-sqlite --no-warnings server.js"
+  }
+}
